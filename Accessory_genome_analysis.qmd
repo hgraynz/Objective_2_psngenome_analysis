@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-Whole genome sequence data from 139 STEC O157 were included in the below analysis. This is based off Dr Sara Burgess's "AMR dairy calf project - modelling analysis". A gene presence absence matrix was generated using Roary (v.3.13.0), and the core and accessory genomes were extracted from the gene_presence_absence.csv, with data tied along the way based on what was needed for the functions.
+Whole genome sequence data from 139 STEC O157 were included in the below analysis. This is based off Dr Sara Burgess's "AMR dairy calf project - modelling analysis". A gene presence absence matrix was generated using Panaroo, and the core and accessory genomes were extracted from the gene_presence_absence.csv, with data tied along the way based on what was needed for the functions.
 
 https://link.springer.com/article/10.1186/s12915-023-01562-w#Sec11 https://journals.asm.org/doi/10.1128/spectrum.00956-25 https://link.springer.com/article/10.1007/s10096-023-04600-1#Sec2 https://pmc.ncbi.nlm.nih.gov/articles/PMC12772303/#s2
 
@@ -43,7 +43,7 @@ gene_reordered<-gene_matrix[c("full_name", setdiff(names(gene_matrix), "full_nam
 print(gene_reordered)
 
 # Save it to make things easier
-write.csv(gene_reordered, "gene_reordered.csv", row.names = FALSE)
+write.csv(gene_reordered, "~/STEC_139/Objective_2_pangenome_analysis/Data/gene_reordered.csv", row.names = FALSE)
 
 # ok, lets load in the new matrix
 gene_reordered_matrix <- read.csv(
@@ -294,8 +294,8 @@ head(pc2_df, 10)
 
 # Lets save the files for easy access
 
-write.csv(pc1_df, "pc1_df.csv", row.names = FALSE)
-write.csv(pc2_df, "pc2_df.csv", row.names = FALSE)
+write.csv(pc1_df, "~/STEC_139/Objective_2_pangenome_analysis/Data/pc1_df.csv", row.names = FALSE)
+write.csv(pc2_df, "~/STEC_139/Objective_2_pangenome_analysis/Data/pc2_df.csv", row.names = FALSE)
 ```
 
 ```{r stx_genes}
