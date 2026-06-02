@@ -315,7 +315,7 @@ print(selected_data_stx_genes)
 
 str(transposed_accessory_for_excel)
 
-# Lets list the isolates induvidually, just so I make sure I have them all
+# Lets list the isolates individually, just so I make sure I have them all
 keep_isolates <- c(
 "EcCa531a","EcCa531b","EcCa531c","EcCa531d",
 "EcCa532a","EcCa533a",
