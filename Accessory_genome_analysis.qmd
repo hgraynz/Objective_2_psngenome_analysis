@@ -361,6 +361,9 @@ metadata_filtered <- read.csv("~/STEC_139/Panaroo_bakta/metadata_filtered.csv", 
 # compute distance matrix
 dist_matrix_accessory_filtered <- vegdist(transposed_accessory_filtered %>% select(-Isolate_ID),
                                  method = "jaccard", binary = TRUE)
+####################
+## beta diversity ##
+####################
 
 #Permanova of accessory genes
 set.seed(312)
@@ -503,6 +506,10 @@ print(selected_data_stx_genes_filtered)
 ```
 
 ```{r alphadiv_farm84}
+#####################
+## alpha diversity ##
+#####################
+
 library(vegan)
 library(dplyr)
 
@@ -537,6 +544,10 @@ head(diversity_results)
 
 diversity_results <- diversity_results %>%
   left_join(metadata_filtered, by = "Isolate_ID")
+
+##############
+## Plotting ##
+##############
 
 ggplot(diversity_results,
        aes(x = Sample_site,
