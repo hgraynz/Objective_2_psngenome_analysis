@@ -27,12 +27,12 @@ library(performance)
 ```
 
 ```{r Roary_core_accessory, results = 'hide'}
-setwd("~/STEC_139/Panaroo_bakta")
+setwd("~/STEC_139/Objective_2_pangenome_analysis")
 
 # lets try combining column 1 and 3 together as column 1 is all unique, but column 3 gives the actual annotation. 
 
 # Load Panaroo matrix
-gene_matrix <- read.csv("~/STEC_139/Panaroo_bakta/gene_presence_absence_panaroo.csv", stringsAsFactors = FALSE,  # prevent factor conversion
+gene_matrix <- read.csv("~/STEC_139/Objective_2_pangenome_analysis/Data/gene_presence_absence_panaroo.csv", stringsAsFactors = FALSE,  # prevent factor conversion
   check.names = FALSE       # prevents R from changing isolate names
 )
 
@@ -148,7 +148,7 @@ transposed_accessory_df <- transposed_accessory_df %>%
   select(Isolate_ID, everything())
 
 # Export to CSV
-write.csv(transposed_accessory_df, "~/STEC_139/Panaroo_bakta/transposed_accessory_for_excel.csv", row.names = FALSE)
+write.csv(transposed_accessory_df, "~/STEC_139/Objective_2_pangenome_analysis/Data/transposed_accessory_for_excel.csv", row.names = FALSE)
 
 ############################
 ## Double checking things ##
@@ -157,7 +157,7 @@ write.csv(transposed_accessory_df, "~/STEC_139/Panaroo_bakta/transposed_accessor
 
 # Number of isolates (columns before transpose)
 ncol(accessory_binary_only)
-# Or after transpose (rows)
+# Or after transpose (rows) - lets just double check please
 nrow(transposed_accessory)
 
 
@@ -173,9 +173,9 @@ missing_in_accessory
 
 ```{r accessory_data_setup}
 # Load in metadata, isolate IDs should be matching now
-metadata <- read.csv("~/STEC_139/Panaroo_bakta/metadata_Apr26.csv", header = TRUE, stringsAsFactors = FALSE)
+metadata <- read.csv("~/STEC_139/Objective_2_pangenome_analysis/Data/metadata_Apr26.csv", header = TRUE, stringsAsFactors = FALSE)
 # The transposed 
-transposed_accessory_for_excel <- read.csv("~/STEC_139/Panaroo_bakta/transposed_accessory_for_excel.csv", stringsAsFactors=TRUE)
+transposed_accessory_for_excel <- read.csv("~/STEC_139/Objective_2_pangenome_analysis/Data/transposed_accessory_for_excel.csv", stringsAsFactors=TRUE)
 
 # compute distance matrix
 dist_matrix_accessory <- vegdist(transposed_accessory_for_excel %>% select(-Isolate_ID),
@@ -183,6 +183,9 @@ dist_matrix_accessory <- vegdist(transposed_accessory_for_excel %>% select(-Isol
 ```
 
 ```{r permanova_accessory}
+####################
+## beta diversity ##
+####################
 
 #Permanova of accessory genes
 set.seed(312)
@@ -356,7 +359,7 @@ setdiff(keep_isolates, rownames(transposed_accessory_for_excel))
 
 ```{r perm_farm84}
 # load in the corresponding metadata
-metadata_filtered <- read.csv("~/STEC_139/Panaroo_bakta/metadata_filtered.csv", header = TRUE, stringsAsFactors = FALSE)
+metadata_filtered <- read.csv("~/STEC_139/Objective_2_pangenome_analysis/Data/metadata_filtered.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # compute distance matrix
 dist_matrix_accessory_filtered <- vegdist(transposed_accessory_filtered %>% select(-Isolate_ID),
@@ -486,8 +489,8 @@ head(pc2_df_filtered, 10)
 
 
 # Lets save the files for easy access
-write.csv(pc1_df_filtered, "~/STEC_139/Panaroo_bakta/pc1_df_filtered.csv", row.names = FALSE)
-write.csv(pc2_df_filtered, "~/STEC_139/Panaroo_bakta/pc2_df_filtered.csv", row.names = FALSE)
+write.csv(pc1_df_filtered, "~/STEC_139/Objective_2_pangenome_analysis/Data/pc1_df_filtered.csv", row.names = FALSE)
+write.csv(pc2_df_filtered, "~/STEC_139/Objective_2_pangenome_analysis/Data/pc2_df_filtered.csv", row.names = FALSE)
 
 ```
 
