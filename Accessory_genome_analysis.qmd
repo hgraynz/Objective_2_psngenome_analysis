@@ -6,6 +6,8 @@ editor: visual
 
 # Accessory_genome_analysis
 
+## All 139 isolates
+
 Whole genome sequence data from 139 STEC O157 were included in the below analysis. This is based off Dr Sara Burgess's "AMR dairy calf project - modelling analysis". A gene presence absence matrix was generated using Panaroo, and the core and accessory genomes were extracted from the gene_presence_absence.csv, with data tied along the way based on what was needed for the functions.
 
 https://link.springer.com/article/10.1186/s12915-023-01562-w#Sec11 https://journals.asm.org/doi/10.1128/spectrum.00956-25 https://link.springer.com/article/10.1007/s10096-023-04600-1#Sec2 https://pmc.ncbi.nlm.nih.gov/articles/PMC12772303/#s2
@@ -28,7 +30,7 @@ library(car)
 library(performance)
 ```
 
-## Seperating core and accessory genomes
+### Seperating core and accessory genomes
 
 The panaroo default for the core genome is that 95% of the isolates must contain the gene therefore to be included in the core genome 132 of the genomes must have a gene
 
@@ -188,22 +190,7 @@ dist_matrix_accessory <- vegdist(transposed_accessory_for_excel %>% select(-Isol
                                  method = "jaccard", binary = TRUE)
 ```
 
-## BETA diversity
 
-This is the PERMANOVA and PERMdisp tests. It measures the change or turnover of species composition across different ecosystems, habitats, or geographic regions.
-
-```{r permanova_accessory}
-####################
-## beta diversity ##
-####################
-
-#Permanova of accessory genes
-set.seed(312)
-perm_accessory <- adonis2(dist_matrix_accessory ~ Sample_site , data = metadata, permutations = 1000, by = "margin")
-
-perm_accessory
-
-```
 
 ```{r PCoA_accessory_analysis}
 # Number of isolates in distance matrix
@@ -320,6 +307,26 @@ selected_data_stx_genes <- pc1_df[stx_genes, ]
 
 print(selected_data_stx_genes)
 ```
+
+### BETA diversity
+
+This is the PERMANOVA and PERMdisp tests. It measures the change or turnover of species composition across different ecosystems, habitats, or geographic regions.
+
+```{r permanova_accessory}
+####################
+## beta diversity ##
+####################
+
+#Permanova of accessory genes
+set.seed(312)
+perm_accessory <- adonis2(dist_matrix_accessory ~ Sample_site , data = metadata, permutations = 1000, by = "margin")
+
+perm_accessory
+
+```
+
+
+## Farm 84 isolates 
 
 ```{r keeping_farm_84}
 ##############
@@ -509,7 +516,7 @@ selected_data_stx_genes_filtered <- pc1_df[stx_genes, ]
 print(selected_data_stx_genes_filtered)
 ```
 
-## ALPHA diversity
+#### ALPHA diversity
 
 Shannon and Simpson diversity tests.
 
@@ -603,7 +610,7 @@ kruskal.test(Simpson ~ Sample_site,
              data = diversity_results)
 ```
 
-## BETA diversity
+### BETA diversity
 
 This is the PERMANOVA and PERMdisp tests. It measures the change or turnover of species composition across different ecosystems, habitats, or geographic regions.
 
