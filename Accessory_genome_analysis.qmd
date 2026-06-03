@@ -190,7 +190,7 @@ dist_matrix_accessory <- vegdist(transposed_accessory_for_excel %>% select(-Isol
                                  method = "jaccard", binary = TRUE)
 ```
 
-
+### PCoA
 
 ```{r PCoA_accessory_analysis}
 # Number of isolates in distance matrix
@@ -231,7 +231,8 @@ variance_explained[1:2]
 
 # SBI
 ggplot(pcoa_plot_data, aes(x = PCoA1, y = PCoA2, color = SBI)) +
-  geom_point(size = 3) +
+  geom_jitter(width = 0.03, height = 0.03, size = 3, alpha = 0.8)  +
+  stat_ellipse(aes(fill = SBI), geom = "polygon", alpha = 0.2) +
   theme_minimal() +
   labs(
     title = "Accessory Genome PCoA",
@@ -241,7 +242,8 @@ ggplot(pcoa_plot_data, aes(x = PCoA1, y = PCoA2, color = SBI)) +
 
 # sample site
 ggplot(pcoa_plot_data, aes(x = PCoA1, y = PCoA2, color = Sample_site)) +
-  geom_point(size = 3) +
+  geom_jitter(width = 0.05, height = 0.05, size = 3, alpha = 0.8) +
+  stat_ellipse(aes(fill = Sample_site), geom = "polygon", alpha = 0.2) +
   theme_minimal() +
   labs(
     title = "Accessory Genome PCoA",
@@ -249,6 +251,10 @@ ggplot(pcoa_plot_data, aes(x = PCoA1, y = PCoA2, color = Sample_site)) +
     y = paste0("PCoA2 (", variance_explained[2], "%)")
   )
 ```
+
+
+
+### Significant genes
 
 ```{r signif_genes}
 
@@ -294,6 +300,7 @@ head(pc2_df, 10)
 write.csv(pc1_df, "~/STEC_139/Objective_2_pangenome_analysis/Data/pc1_df.csv", row.names = FALSE)
 write.csv(pc2_df, "~/STEC_139/Objective_2_pangenome_analysis/Data/pc2_df.csv", row.names = FALSE)
 ```
+### Stx genes
 
 ```{r stx_genes}
 ###############
@@ -383,6 +390,8 @@ dist_matrix_accessory_filtered <- vegdist(transposed_accessory_filtered %>% sele
                                  method = "jaccard", binary = TRUE)
 ```
 
+### PCoA
+
 ```{r PCoA_farm84}
 # Number of isolates in distance matrix
 length(attr(dist_matrix_accessory_filtered, "Labels"))
@@ -425,7 +434,8 @@ variance_explained_filtered[1:2]
 
 # Plot by SBI
 ggplot(pcoa_plot_data_filtered, aes(x = PCoA1, y = PCoA2, color = SBI)) +
-  geom_point(size = 3) +
+    geom_jitter(width = 0.05, height = 0.05, size = 3, alpha = 0.8) +
+    stat_ellipse(aes(fill = SBI), geom = "polygon", alpha = 0.2) +
   theme_minimal() +
   labs(
     title = "Accessory Genome PCoA (Filtered)",
@@ -436,7 +446,8 @@ ggplot(pcoa_plot_data_filtered, aes(x = PCoA1, y = PCoA2, color = SBI)) +
 
 # Plot by Sample_site
 ggplot(pcoa_plot_data_filtered, aes(x = PCoA1, y = PCoA2, color = Sample_site)) +
-  geom_point(size = 3) +
+  geom_jitter(width = 0.05, height = 0.05, size = 3, alpha = 0.8) +
+  stat_ellipse(aes(fill = Sample_site), geom = "polygon", alpha = 0.2) +
   theme_minimal() +
   labs(
     title = "Accessory Genome PCoA (Filtered)",
@@ -444,6 +455,8 @@ ggplot(pcoa_plot_data_filtered, aes(x = PCoA1, y = PCoA2, color = Sample_site)) 
     y = paste0("PCoA2 (", variance_explained_filtered[2], "%)")
   )
 ```
+
+### Significant genes
 
 ```{r signif_genes_farm84}
 # Create binary accessory matrix (filtered)
@@ -501,6 +514,8 @@ write.csv(pc1_df_filtered, "~/STEC_139/Objective_2_pangenome_analysis/Data/pc1_d
 write.csv(pc2_df_filtered, "~/STEC_139/Objective_2_pangenome_analysis/Data/pc2_df_filtered.csv", row.names = FALSE)
 
 ```
+
+### Stx genes
 
 ```{r stx_genes_farm84}
 ###############
