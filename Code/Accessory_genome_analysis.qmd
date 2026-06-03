@@ -430,10 +430,19 @@ variance_explained_filtered[1:2]
 ## Plotting ##
 ##############
 
+# setting SBI colours
+SBI_colours <- c(
+  "AWY2a"     = "#2CA02C",
+  "AY2a" = "#1F77B4",
+  "SY2c"  = "#FFBB78"
+)
+
 # Plot by SBI
 P_1_84<-ggplot(pcoa_plot_data_filtered, aes(x = PCoA1, y = PCoA2, color = SBI)) +
-    geom_jitter(width = 0.05, height = 0.05, size = 3, alpha = 0.8) +
-    stat_ellipse(aes(fill = SBI), geom = "polygon", alpha = 0.2, type = "norm") +
+  geom_jitter(width = 0.05, height = 0.05, size = 3, alpha = 0.8) +
+  stat_ellipse(aes(fill = SBI), geom = "polygon", alpha = 0.2, type = "norm") +
+  scale_color_manual(values = SBI_colours) +
+  scale_fill_manual(values = SBI_colours) +
   theme_minimal() +
   labs(
     x = paste0("Axis.1 [", variance_explained_filtered[1], "%]"),
