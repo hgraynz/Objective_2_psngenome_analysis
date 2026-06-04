@@ -436,7 +436,7 @@ SBI_colours <- c(
   "AY2a" = "#1F77B4",
   "SY2c"  = "#FFBB78"
 )
-## 
+
 
 # Plot by SBI
 P_1_84<-ggplot(pcoa_plot_data_filtered, aes(x = PCoA1, y = PCoA2, color = SBI)) +
